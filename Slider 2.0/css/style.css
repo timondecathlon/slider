@@ -1,0 +1,15 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+
+
+.bg-fix{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:  center center;
+}
