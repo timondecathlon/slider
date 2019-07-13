@@ -24,21 +24,67 @@ $slides = [
 ?>
 
 <body>
-    <div class="slider flex-box">
-                <ul class="slides">
-					<?foreach($slides as $elem){?>
-						<li>
-							<div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
-                                <!--
+
+    <div class="slider flex-box horizontal-nav horizontal-arrows vertical-nav vertical-arrows">
+        <ul class="slides">
+            <?foreach($slides as $elem){?>
+                <li>
+                    <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
+                        <div>
+                            <a href="<?=$elem[2]?>"><?=$elem[1]?></a>
+                        </div>
+                    </div>
+                </li>
+            <?}?>
+        </ul>
+    </div>
+
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+
+    <div class="slider flex-box horizontal-nav horizontal-arrows">
+        <ul class="slides">
+            <?foreach($slides as $elem){?>
+                <li>
+                    <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
+                        <div>
+                            <a href="<?=$elem[2]?>"><?=$elem[1]?></a>
+                        </div>
+                    </div>
+                </li>
+            <?}?>
+        </ul>
+    </div>
+
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <div class="slider flex-box vertical-nav vertical-arrows">
+        <ul class="slides">
+            <?foreach($slides as $elem){?>
+                <li>
+                    <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
+                        <!--
 								<div>
 									<a href="<?=$elem[2]?>"><?=$elem[1]?></a>
 								</div>
 								-->
-							</div>
-						</li>
-					<?}?>
-				</ul>
+                    </div>
+                </li>
+            <?}?>
+        </ul>
     </div>
+
+
 
 	
 	<script src="js/slider.js"></script> 
