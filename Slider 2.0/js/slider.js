@@ -70,36 +70,68 @@
 	var canScroll = 1;
 	var slideSpeed = 1000;
 
-	/*работает норм
+	/*
+	//работает норм
 	setInterval(function(){
 
-		if(canScroll == 1){
+		if(canScroll === 1){
 				canScroll = 0;
-				$('.slides').css('display','flex');
-				//вот эта фигня давала дробные значения ее надо сразу было сейлить поэтом слайд третий и плоховал))
-				let currOffset = Math.ceil($('.slider').scrollLeft());
-				//Определяем ширину слайда
-				let deltaOffset = parseInt($('.slider-container').find('.slider').css('width'));
-				//определяем количество слайдов
-				let slidesCount = $('.slides > li').length;
 
-				//Направление прокрутки
-				if($(this).attr('data-scroll') == '-1'){
-					deltaOffset = - deltaOffset;
-				}
+                let sliders = $('.slider');
 
-				//крутим
-				if(Math.ceil(currOffset + deltaOffset) <= 0){
-					$('.slider').animate({scrollLeft : 0}, slideSpeed);
-				}else if(currOffset + deltaOffset >= slidesCount*Math.abs(deltaOffset)){
-					$('.slider').animate({scrollLeft : 0}, slideSpeed);
-				}else{
-					$('.slider').animate({scrollLeft : currOffset + deltaOffset}, slideSpeed);
-				}
-				setTimeout(function(){canScroll = 1;},slideSpeed);
+                for(let i = 0; i < sliders.length; i ++){
+                    let slider = sliders[i];
+
+
+                    $(slider).find('.slides').css('display','flex');
+                    //вот эта фигня давала дробные значения ее надо сразу было сейлить поэтом слайд третий и плоховал))
+                    let currOffset = Math.ceil($(slider).find('.slides').scrollLeft());
+                    //Определяем ширину слайда
+                    let deltaOffset = parseInt($(slider).find('.slides > li').css('width'));
+                    //определяем количество слайдов
+                    let slidesCount = $(slider).find('.slides > li').length;
+
+
+                    //крутим
+                    if(Math.ceil(currOffset + deltaOffset) <= 0){
+                        $(slider).find('.slides').animate({scrollLeft : 0}, slideSpeed);
+                    }else if(currOffset + deltaOffset >= slidesCount*Math.abs(deltaOffset)){
+                        $(slider).find('.slides').animate({scrollLeft : 0}, slideSpeed);
+                    }else{
+                        $(slider).find('.slides').animate({scrollLeft : currOffset + deltaOffset}, slideSpeed);
+                    }
+
+
+                    let curr_slide_num = $(slider).find('.control-nav-element-active').attr('data-num');
+                    //определяем номер следуешего слайда
+                    let next_slide_num = parseInt(curr_slide_num) + 1;
+                    //alert(next_slide_num);
+                    $(slider).find('.control-nav-element').removeClass('control-nav-element-active');
+                    let all_dots = $(slider).find('.control-nav-element');
+                    for(let i = 0; i < all_dots.length; i++){
+                        if(next_slide_num <= 0){
+                            //если достигли начала делаем первые точки активными и все
+                            $(slider).find('.control-nav-container').find('.control-nav-element:first-child').addClass('control-nav-element-active');
+                        }else if(next_slide_num > slidesCount){
+                            //если достигли конца ленты делаем первые точки активными и все
+                            $(slider).find('.control-nav-container').find('.control-nav-element:first-child').addClass('control-nav-element-active');
+                        }else{
+                            //если аттрибут точки равен номеру слайда то делаем ее активной
+                            if(all_dots[i].getAttribute('data-num') == next_slide_num){
+                                $(all_dots[i]).addClass('control-nav-element-active');
+                            }
+                        }
+                    }
+
+
+                }
+                setTimeout(function(){canScroll = 1;},slideSpeed);
+
+
 		}
     },3000);
-	*/
+    */
+
 
 	//Клик по точкам вертикального и горизонтального
     $('body').on('click','.control-nav-element',function(){
