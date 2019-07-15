@@ -25,19 +25,22 @@ $slides = [
 
 <body>
 
-    <div class="slider flex-box horizontal-nav horizontal-arrows vertical-nav vertical-arrows">
-        <ul class="slides">
-            <?foreach($slides as $elem){?>
-                <li>
-                    <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
-                        <div>
-                            <a href="<?=$elem[2]?>"><?=$elem[1]?></a>
+    <div class="test-1" style="width: 1000px;">
+        <div class="slider flex-box horizontal-nav horizontal-arrows vertical-nav vertical-arrows">
+            <ul class="slides">
+                <?foreach($slides as $elem){?>
+                    <li>
+                        <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
+                            <div>
+                                <a href="<?=$elem[2]?>"><?=$elem[1]?></a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            <?}?>
-        </ul>
+                    </li>
+                <?}?>
+            </ul>
+        </div>
     </div>
+
 
     <div>
         <br>
@@ -47,19 +50,22 @@ $slides = [
     </div>
 
 
-    <div class="slider flex-box horizontal-nav horizontal-arrows">
-        <ul class="slides">
-            <?foreach($slides as $elem){?>
-                <li>
-                    <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
-                        <div>
-                            <a href="<?=$elem[2]?>"><?=$elem[1]?></a>
+    <div style="width: 50%;">
+        <div class="slider flex-box horizontal-nav horizontal-arrows">
+            <ul class="slides">
+                <?foreach($slides as $elem){?>
+                    <li>
+                        <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
+                            <div>
+                                <a href="<?=$elem[2]?>"><?=$elem[1]?></a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            <?}?>
-        </ul>
+                    </li>
+                <?}?>
+            </ul>
+        </div>
     </div>
+
 
     <div>
         <br>
