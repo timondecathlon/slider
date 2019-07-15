@@ -1,47 +1,46 @@
-	
-    
-	   
-	 
-	
+
+
+
+
+
     //ширина слайдера при загрузке
     $(document).ready(function(){
 
     	let sliders = $('.slider');
-    	//alert(sliders.length);
 
     	for(let i = 0; i < sliders.length; i ++){
-            let sliderWidth = $(window).width();
-            //let sliderWidth = $(this).closest('parent').width();
-            $(sliders[i]).find('.slides > li').css('width',sliderWidth+'px');
+    	    let slider = sliders[i];
+            let sliderWidth = $(slider).closest('div').width();
+            $(slider).find('.slides > li').css('width',sliderWidth+'px');
 
             //добавляем элементы управления горизонтальные
-			if($(sliders[i]).hasClass('horizontal-arrows')){
-                $(sliders[i]).prepend('<div class="slider-nav slider-prev bg-fix" data-scroll="-1"></div>');
-                $(sliders[i]).prepend('<div class="slider-nav slider-next bg-fix" data-scroll="1"></div>');
+			if($(slider).hasClass('horizontal-arrows')){
+                $(slider).prepend('<div class="slider-nav slider-prev bg-fix" data-scroll="-1"></div>');
+                $(slider).prepend('<div class="slider-nav slider-next bg-fix" data-scroll="1"></div>');
 			}
 
 
             //добавляем элементы управления вертикальные
-            if($(sliders[i]).hasClass('vertical-arrows')){
-                $(sliders[i]).prepend('<div class="slider-nav-vertical slider-up bg-fix" data-scroll="-1"></div>');
-                $(sliders[i]).prepend('<div class="slider-nav-vertical slider-down bg-fix" data-scroll="1"></div>');
+            if($(slider).hasClass('vertical-arrows')){
+                $(slider).prepend('<div class="slider-nav-vertical slider-up bg-fix" data-scroll="-1"></div>');
+                $(slider).prepend('<div class="slider-nav-vertical slider-down bg-fix" data-scroll="1"></div>');
             }
 
 
             //добавление горизонатальных точек
-            if($(sliders[i]).hasClass('horizontal-nav')){
-                $(sliders[i]).prepend('<div class="control-nav-horizontal control-nav-container"></div>');
+            if($(slider).hasClass('horizontal-nav')){
+                $(slider).prepend('<div class="control-nav-horizontal control-nav-container"></div>');
             }
-            if($(sliders[i]).hasClass('vertical-nav')){
-                $(sliders[i]).prepend('<div class="control-nav-vertical control-nav-container"></div>');
+            if($(slider).hasClass('vertical-nav')){
+                $(slider).prepend('<div class="control-nav-vertical control-nav-container"></div>');
             }
-            let slidesCount = $(sliders[i]).find('.slides > li').length;
+            let slidesCount = $(slider).find('.slides > li').length;
             for(let j = 0; j <  slidesCount; j++){
-                if($(sliders[i]).hasClass('horizontal-nav')){
-                    $(sliders[i]).find('.control-nav-horizontal').append('<div class="control-nav-element" data-num="'+ (j+1) +'">.</div>');
+                if($(slider).hasClass('horizontal-nav')){
+                    $(slider).find('.control-nav-horizontal').append('<div class="control-nav-element" data-num="'+ (j+1) +'">.</div>');
                 }
-                if($(sliders[i]).hasClass('vertical-nav')){
-                    $(sliders[i]).find('.control-nav-vertical').append('<div class="control-nav-element" data-num="'+ (j+1) +'">.</div>');
+                if($(slider).hasClass('vertical-nav')){
+                    $(slider).find('.control-nav-vertical').append('<div class="control-nav-element" data-num="'+ (j+1) +'">.</div>');
                 }
             }
 
@@ -51,22 +50,29 @@
         $('.control-nav-container').find('.control-nav-element:first-child').addClass('control-nav-element-active');
 
 
-    }); 
+    });
 
     //Изменение ширины слайдер при ресайзе окна
-    $(window).resize(function(){    
-        let sliderWidth = $(window).width();
-        $('.slider > .slides > li').css('width',sliderWidth+'px');
-    }); 
+    $(window).resize(function(){
+        let sliders = $('.slider');
 
-    //клик на стрелку вправо   
-	
+        for(let i = 0; i < sliders.length; i ++) {
+            let slider = sliders[i];
+            let sliderWidth = $(slider).closest('div').width();
+            $(slider).find('.slides > li').css('width', sliderWidth + 'px');
+        }
+
+
+    });
+
+    //клик на стрелку вправо
+
 	var canScroll = 1;
 	var slideSpeed = 1000;
-	
+
 	/*работает норм
 	setInterval(function(){
-       	
+
 		if(canScroll == 1){
 				canScroll = 0;
 				$('.slides').css('display','flex');
@@ -79,17 +85,17 @@
 
 				//Направление прокрутки
 				if($(this).attr('data-scroll') == '-1'){
-					deltaOffset = - deltaOffset;	
+					deltaOffset = - deltaOffset;
 				}
-				
+
 				//крутим
 				if(Math.ceil(currOffset + deltaOffset) <= 0){
 					$('.slider').animate({scrollLeft : 0}, slideSpeed);
 				}else if(currOffset + deltaOffset >= slidesCount*Math.abs(deltaOffset)){
-					$('.slider').animate({scrollLeft : 0}, slideSpeed);  
+					$('.slider').animate({scrollLeft : 0}, slideSpeed);
 				}else{
-					$('.slider').animate({scrollLeft : currOffset + deltaOffset}, slideSpeed);       
-				} 
+					$('.slider').animate({scrollLeft : currOffset + deltaOffset}, slideSpeed);
+				}
 				setTimeout(function(){canScroll = 1;},slideSpeed);
 		}
     },3000);
@@ -171,7 +177,7 @@
 				if($(this).attr('data-scroll') === '-1'){
 					deltaOffset = - deltaOffset;
 				}
-				
+
 				//крутим
 				if(Math.ceil(currOffset + deltaOffset) <= 0){
                     //если достигли начала ленты то дальше не едем влево
@@ -182,7 +188,7 @@
 				}else{
                     //иначе крутим либо вперед либо назад
                     $(slider).find('.slides').animate({scrollLeft : currOffset + deltaOffset}, slideSpeed);
-				} 
+				}
 				setTimeout(function(){canScroll = 1;},slideSpeed);
 
 
@@ -196,20 +202,28 @@
                 //получаем все точки
                 let all_dots = $(slider).find('.control-nav-element');
                 for(let i = 0; i < all_dots.length; i++){
-                	//если аттрибут точки равен номеру слайда то делаем ее активной
-                    if(all_dots[i].getAttribute('data-num') == next_slide_num){
-                        $(all_dots[i]).addClass('control-nav-element-active');
+                    if(next_slide_num <= 0){
+                        //если достигли начала делаем первые точки активными и все
+                        $(slider).find('.control-nav-container').find('.control-nav-element:first-child').addClass('control-nav-element-active');
+                    }else if(next_slide_num > slidesCount){
+                        //если достигли конца ленты делаем первые точки активными и все
+                        $(slider).find('.control-nav-container').find('.control-nav-element:first-child').addClass('control-nav-element-active');
+                    }else{
+                        //если аттрибут точки равен номеру слайда то делаем ее активной
+                        if(all_dots[i].getAttribute('data-num') == next_slide_num){
+                            $(all_dots[i]).addClass('control-nav-element-active');
+                        }
                     }
                 }
 
-			}	
+			}
     });
-	
+
 
 
 	//Для вертикального
-	
-	
+
+
 	//клик на стрелку вертикальную
     $('body').on('click','.slider-nav-vertical',function(){
 		if(canScroll === 1){
@@ -224,7 +238,7 @@
 			$(slider).find('.slides').css('height',windowHeight+'px');
 			//делаем слайды один под другим
             $(slider).find('.slides').css('display','block');
-			
+
             //определяем величину текущей прокрутки
             let currOffset = Math.ceil($(slider).find('.slides').scrollTop());
 			//Определяем высоту слайда (на сколько куртить)
@@ -234,10 +248,10 @@
 
 			//Направление прокрутки
 			if($(this).attr('data-scroll') == '-1'){
-				deltaOffset = -deltaOffset;	
+				deltaOffset = -deltaOffset;
 			}
 
-			//Крутим 
+			//Крутим
 			if(Math.ceil(currOffset + deltaOffset) <= 0){
                 //если достигли начала ленты то дальше не едем вверх
                 $(slider).find('.slides').animate({scrollTop : 0}, slideSpeed);
@@ -247,7 +261,7 @@
             }else{
                 //иначе крутим либо вперед либо назад
                 $(slider).find('.slides').animate({scrollTop : currOffset + deltaOffset}, slideSpeed);
-            } 
+            }
 			setTimeout(function(){canScroll = 1;},slideSpeed);
 
 
@@ -262,20 +276,27 @@
             //получаем все точки
             let all_dots = $(slider).find('.control-nav-element');
             for(let i = 0; i < all_dots.length; i++){
-                //если аттрибут точки равен номеру слайда то делаем ее активной
-                if(all_dots[i].getAttribute('data-num') == next_slide_num){
-                    $(all_dots[i]).addClass('control-nav-element-active');
+                if(next_slide_num <= 0){
+                    //если достигли начала делаем первые точки активными и все
+                    $(slider).find('.control-nav-container').find('.control-nav-element:first-child').addClass('control-nav-element-active');
+                }else if(next_slide_num > slidesCount){
+                    //если достигли конца ленты делаем первые точки активными и все
+                    $(slider).find('.control-nav-container').find('.control-nav-element:first-child').addClass('control-nav-element-active');
+                }else{
+                    //если аттрибут точки равен номеру слайда то делаем ее активной
+                    if(all_dots[i].getAttribute('data-num') == next_slide_num){
+                        $(all_dots[i]).addClass('control-nav-element-active');
+                    }
                 }
             }
 		}
-			
+
     });
 
 
 
 
 
-	
-	
-	
-	    
+
+
+
