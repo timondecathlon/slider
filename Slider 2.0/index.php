@@ -25,7 +25,43 @@ $slides = [
 
 <body>
 
-    <div class="test-1" style="width: 1000px;">
+
+    <div class="slider-complex" style="width: 1000px;">
+        <div class="slider flex-box horizontal-nav horizontal-arrows ">
+            <ul class="slides">
+                <?foreach($slides as $elem){?>
+                    <li>
+                        <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 500px">
+                            <div>
+                                <a href="<?=$elem[2]?>"><?=$elem[1]?></a>
+                            </div>
+                        </div>
+                    </li>
+                <?}?>
+            </ul>
+        </div>
+        <div class="slider carousel flex-box horizontal-arrows " style=" height: 200px;" data-slides="4">
+            <ul class="slides">
+                <?foreach($slides as $elem){?>
+                    <li>
+                        <div  class="bg-fix" style="background-image: url('<?=$elem[0]?>');  height: 200px">
+
+                        </div>
+                    </li>
+                <?}?>
+            </ul>
+        </div>
+    </div>
+
+
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <div style="width: 1000px;">
         <div class="slider flex-box horizontal-nav horizontal-arrows vertical-nav vertical-arrows">
             <ul class="slides">
                 <?foreach($slides as $elem){?>
